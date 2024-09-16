@@ -20,12 +20,9 @@ export async function POST(request) {
 
        
         const [rows] = await connection.execute(
-            `select  firstName, groupid, Parentid,RegistrationNumber from TblRegistration where RegistrationId=?
-UNION all
-select  firstName, groupid, Parentid,RegistrationNumber from TblRegistration where Parentid=?`,
-            [Parentid,Parentid]
+            'CALL GetTreeData(?)',
+            [Parentid]
         );
-
        
         await connection.end();
   return new Response(
