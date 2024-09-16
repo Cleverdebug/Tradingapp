@@ -32,16 +32,14 @@ const Getlevel = async() => {
     headers: {
         "Content-Type": "application/json",
     },
-    body: JSON.stringify({Parentid:1377}),
+    body: JSON.stringify({Parentid:JSON.parse(localStorage.getItem('Userinfo')).RegistrationId}),
 }).then((res) => res.json()).then((data) => {
   let firstrow = data.rows[0]
-  let firstrowCollction  = firstrow.filter((d) => d.Parentid === 1377)
-  let LeftFirstRow = firstrow.filter((d) => d.Parentid === 1377).slice(0,1)
-  let RightFirstRow = firstrow.filter((d) => d.Parentid === 1377).slice(1,2)
+  let firstrowCollction  = firstrow.filter((d) => d.Parentid === JSON.parse(localStorage.getItem('Userinfo')).RegistrationId)
+  let LeftFirstRow = firstrow.filter((d) => d.Parentid === JSON.parse(localStorage.getItem('Userinfo')).RegistrationId).slice(0,1)
+  let RightFirstRow = firstrow.filter((d) => d.Parentid === JSON.parse(localStorage.getItem('Userinfo')).RegistrationId).slice(1,2)
   setFirstLeftRow(LeftFirstRow)
   setFirstRightRow(RightFirstRow)
-  // console.log(LeftFirstRow,"LeftFirstRow")
-  // console.log(RightFirstRow,"RightFirstRow")
   let LeftSecondRows = firstrow.filter((d) => d.Parentid === LeftFirstRow.at(0).Registrationid)
   console.log(LeftSecondRow,"LeftSecondRow")
   if(LeftSecondRows !=0) {
